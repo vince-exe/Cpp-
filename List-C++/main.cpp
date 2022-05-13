@@ -9,7 +9,7 @@ file created for testing the List
 
 Version: BETA
 
-Method Tested:
+Methods Tested:
 
     appendStart();
 
@@ -30,6 +30,8 @@ Method Tested:
     find();
 
     getItem();
+
+    removeAll();
 
 Developing Phase:
     
@@ -97,10 +99,24 @@ int main() {
 
     /*find the position of the items in the list*/
     std::cout<<"\nPosition of the item that has 0 as value: "<<lista.find(0)<<std::endl;
-
+    
     /*free the list*/
     lista.free();
+    
+    lista.appendEnd(1);
+    lista.appendEnd(1);
+    lista.appendEnd(1);
+    lista.appendEnd(2);
+    
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\nitem: "<<lista.getItem(i);
+    }
 
-    std::cout<<std::endl;
-    return 0;
+    lista.removeAll(1);
+
+    std::cout<<"\nDopo la rimozione";
+
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\nitem: "<<lista.getItem(i);
+    }
 }

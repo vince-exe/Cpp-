@@ -20,6 +20,8 @@ namespace stl {
             struct stn::Node<T>* end_;
             int lenght_;
 
+            void setHead(stn::Node<T>* newAddress);
+
         public:
             /*default constructor*/
             List();
@@ -40,6 +42,12 @@ namespace stl {
             stn::Node<T>* next(stn::Node<T>* it);
 
             /*
+            return the memory address of the item at the given index
+            WARNING: This method doesn't check if the index is correctù
+            */
+            stn::Node<T>* getItemAddress(int index);
+
+            /*
             check if the given pointer point to the end of the list
             
             True: The pointer does.
@@ -55,6 +63,13 @@ namespace stl {
                      otherwise you have to overload the == operator
             */
             bool remove(T value);
+
+            /*
+            remove all the items the has like value the given value, return true if at least one item has been removed
+            WARNING: Use this method only if your list is one of this type (int, char, string bool, float, double)
+            otherwise you have to overload the == operator
+            */
+            void removeAll(T value);
 
             /*
             search in the list the item that has the given value and return his position,
