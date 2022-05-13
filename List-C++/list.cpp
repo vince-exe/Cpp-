@@ -83,6 +83,12 @@ template<class T> T stl::List<T>::getItem(int index) {
 }
 
 template<class T> stn::Node<T> *stl::List<T>::getItemAddress(int index) {
+    if(index < 0) {
+        return this->head;
+    }else if(index >= this->lenght_) {
+        return this->end_;
+    }
+    
     struct stn::Node<T>* tmp = this->head;
 
     for(int i=0; i<index && tmp != nullptr; i++) {
@@ -147,11 +153,16 @@ template<class T> bool stl::List<T>::remove(T value) {
 
 template<class T> void stl::List<T>::removeAll(T value) {
     stl::List<T> newList;
-    struct stn::Node<T>* tmp = this->head;
 
+    struct stn::Node<T>* tmp = this->head;
+    struct stn::Node<T>* tmp2 = nullptr;
+
+    this->lenght_ = 0;
+    
     while(tmp != nullptr) {
         if(tmp->data != value) {
             newList.appendEnd(tmp->data);
+            this->lenght_ += 1;
         }
         tmp = tmp->next;
     }

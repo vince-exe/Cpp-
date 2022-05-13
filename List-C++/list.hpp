@@ -43,7 +43,9 @@ namespace stl {
 
             /*
             return the memory address of the item at the given index
-            WARNING: This method doesn't check if the index is correctù
+            WARNING:
+                case Index-Greater: the method will return the last memory address of the list
+                case Index-Negative: the method will return the first memory address of the list
             */
             stn::Node<T>* getItemAddress(int index);
 

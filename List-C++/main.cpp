@@ -119,4 +119,6 @@ int main() {
     for(int i=0; i<lista.lenght(); i++) {
         std::cout<<"\nitem: "<<lista.getItem(i);
     }
+    
+    return 0;
 }
