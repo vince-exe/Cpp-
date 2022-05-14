@@ -121,7 +121,77 @@ int main() {
         std::cout<<"\nitem: "<<lista.getItem(i);
     }
 
-    lista.free();
+
+    
     std::cout<<std::endl;
+
+
+    for(int i=0; i<10; i++) {
+        lista.appendEnd(10);
+    }
+
+    std::cout<<"\nHow many nodes with the 10 value are there??: "<<lista.count(10);
+
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\n"<<lista.getItem(i);
+    }
+
+    std::cout<<"\nFirst element of the list: "<<lista.popFront();
+
+    lista.appendEnd(56);
+
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\n"<<lista.getItem(i);
+    } 
+    
+    std::cout<<"\nLast element of the list: "<<lista.popEnd()<<std::endl;
+    
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\n"<<lista.getItem(i);
+    }
+
+    /*replace the item with value 56*/
+    std::cout<<"replaced item: "<<lista.replace(10, 156);
+
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\n"<<lista.getItem(i);
+    }
+
+    lista.free();
+
+    /*replace all the elements*/
+    for(int i=0; i<10; i++) {
+        lista.appendEnd(11);
+    }
+    stn::Node<int>* node = lista.begin();
+    node->data = 56;
+
+    std::cout<<"\nBefore the replace\n";
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\n"<<lista.getItem(i);
+    }
+
+    lista.replaceAll(11, 8);
+
+    std::cout<<"\nAfter the replace\n";
+    for(int i=0; i<lista.lenght(); i++) {
+        std::cout<<"\n"<<lista.getItem(i);
+    }
+    
+    lista.free();
+
+    /*testing new constructor*/
+    stl::List<int> list(8, 50);
+
+    std::cout<<"\nNew list's lenght: "<<list.lenght();
+    for(int i=0; i<list.lenght(); i++) std::cout<<"\n"<<list.getItem(i);
+
+    /*testing another constructor overload*/
+    stl::List<int> list2(5, 100, true);
+
+    std::cout<<"\nNew list's lenght: "<<list2.lenght();
+    for(int i=0; i<list2.lenght(); i++) std::cout<<"\n"<<list2.getItem(i);
+
+    
     return 0;
 }

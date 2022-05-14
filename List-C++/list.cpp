@@ -18,6 +18,32 @@ template<class T> inline stl::List<T>::List() {
     this->lenght_ = 0;
 }
 
+template<class T> stl::List<T>::List(int iterate, T value, bool end) {
+    this->head = nullptr;
+    this->end_ = nullptr;
+    this->lenght_ = 0;
+    
+    if(end) {
+        for(int i=0; i<iterate; i++) {
+            this->appendEnd(value);
+        }
+    }else {
+        for(int i=0; i<iterate; i++) {
+            this->appendStart(value);
+        }
+    }
+}
+
+template<class T> stl::List<T>::List(int iterate, T value) {
+    this->head = nullptr;
+    this->end_ = nullptr;
+    this->lenght_ = 0;
+
+    for(int i=0; i<iterate; i++) {
+        this->appendStart(value);
+    }
+} 
+
 template<class T> void stl::List<T>::appendStart(T value) {
     struct stn::Node<T>* newNode = new stn::Node<T>;
 
@@ -160,6 +186,73 @@ template<class T> bool stl::List<T>::remove(T value) {
     return true;
 }
 
+template<class T> bool stl::List<T>::replace(T value, T newValue) {
+    struct stn::Node<T>* tmp = this->head;
+
+    while (tmp != nullptr && tmp->data != value) {
+        tmp = tmp->next;
+    }
+
+    if(tmp == nullptr) {
+        return false;
+    }
+
+    tmp->data = newValue;
+    return true;
+}
+
+template<class T> bool stl::List<T>::replaceAll(T value, T newValue) {
+    struct stn::Node<T>* tmp = this->head;
+
+    bool atLeast = false;
+
+    while(tmp != nullptr) {
+        if(tmp->data == value) {
+            tmp->data = newValue;
+
+            atLeast = true;
+        }
+        tmp = tmp->next;
+    }
+
+    return atLeast;
+}
+
+template<class T> T stl::List<T>::popFront() {
+    if(this->head != nullptr) {
+        struct stn::Node<T>* tmp = this->head;
+
+        this->head = this->head->next;
+        this->lenght_ -= 1;
+
+        T data = tmp->data;
+        delete tmp;
+
+        return data;
+    }
+}
+
+template<class T> T stl::List<T>::popEnd() {
+    if(this->end_ != nullptr) {
+        struct stn::Node<T>* tmp = this->head;
+
+        while(tmp->next != this->end_) {
+            tmp = tmp->next;
+        }
+
+        T data = this->end_->data;
+
+        tmp->next = this->end_->next;
+
+        delete this->end_;
+
+        this->end_ = tmp;
+        this->lenght_ -= 1;
+
+        return data;
+    }
+}
+
 template<class T> void stl::List<T>::removeAll(T value) {
     stn::Node<T>* tmpHead = this->getItemAddress(0);
     stn::Node<T>* prev = nullptr;
@@ -198,4 +291,19 @@ template<class T> int stl::List<T>::find(T value) {
     }
 
     return i;
+}
+
+template<class T> int stl::List<T>::count(T value) {
+    struct stn::Node<T>* tmp = this->head;
+    
+    int count = 0;
+
+    while(tmp != NULL) {
+        if(tmp->data == value) {
+            count += 1;
+        }
+        tmp = tmp->next;
+    }
+    
+    return count;
 }

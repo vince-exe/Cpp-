@@ -29,6 +29,12 @@ namespace stl {
             /*default constructor*/
             List();
 
+            /*create and initialize a list with n values, the values will be added at the start of the list*/
+            List(int iterate, T value);
+
+            /*create and initilize a list with n values, if end is True the values will be added at the end of the code, else..*/
+            List(int iterate, T value, bool end);
+
             /*append the item to the start of the list*/
             void appendStart(T value);
 
@@ -70,11 +76,29 @@ namespace stl {
             bool remove(T value);
 
             /*
+            change the value of a node with the given value, return true if the operation went succesfully else return false
+            NOTE: If the list has more nodes with the given value, it will be modified only the first node the the method find
+                  If you want something else check replaceAll();
+            */
+            bool replace(T value, T newValue);
+
+            /*change the value of all the nodes of the list that have the given value, return true if at least one of this has been modified, else return false*/
+            bool replaceAll(T value, T newValue);
+
+            /*
             remove all the items the has as value the given value.
             WARNING: Use this method only if your list is one of this type (int, char, string bool, float, double)
             otherwise you have to overload the == operator
             */
             void removeAll(T value);
+
+            /*
+            return the first element of the list (head), and reduce the lenght of 1
+            */
+            T popFront();
+
+            /*return the last element of the list, and reduce the lenght of 1*/
+            T popEnd();
 
             /*
             search in the list the item that has the given value and return his position,
@@ -84,6 +108,12 @@ namespace stl {
             */
             int find(T value);
             
+            /*
+            this method iterate throw the list and return the number of nodes that have as value the given value
+            WARNING: use this method onlt if your list is one of this type (int, char, string, bool, float, double)
+            */
+            int count(T value);
+
             /*
             return the item at the given position,
             WARNING: this method does not check if the given index exist
