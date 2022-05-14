@@ -21,6 +21,9 @@ namespace stl {
             int lenght_;
 
             void setHead(stn::Node<T>* newAddress);
+            void setEnd(stn::Node<T>* newAddress);
+
+            stn::Node<T>* getEnd();
 
         public:
             /*default constructor*/
@@ -67,7 +70,7 @@ namespace stl {
             bool remove(T value);
 
             /*
-            remove all the items the has like value the given value, return true if at least one item has been removed
+            remove all the items the has as value the given value.
             WARNING: Use this method only if your list is one of this type (int, char, string bool, float, double)
             otherwise you have to overload the == operator
             */

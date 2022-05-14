@@ -112,13 +112,16 @@ int main() {
         std::cout<<"\nitem: "<<lista.getItem(i);
     }
 
-    lista.removeAll(1);
+    lista.removeAll(1); 
 
-    std::cout<<"\nDopo la rimozione";
+    lista.appendEnd(5);
+    lista.appendEnd(10);
 
     for(int i=0; i<lista.lenght(); i++) {
         std::cout<<"\nitem: "<<lista.getItem(i);
     }
-    
+
+    lista.free();
+    std::cout<<std::endl;
     return 0;
 }

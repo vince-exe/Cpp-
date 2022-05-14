@@ -3,6 +3,14 @@
 template<class T> void stl::List<T>::setHead(stn::Node<T> *newAddress) {
     this->head = newAddress;
 }
+ 
+template<class T> void stl::List<T>::setEnd(stn::Node<T> *newAddress) {
+    this->end_ = newAddress;
+}
+
+template<class T> stn::Node<T> *stl::List<T>::getEnd() {
+    return this->end_;
+}
 
 template<class T> inline stl::List<T>::List() {
     this->head = nullptr;
@@ -62,6 +70,7 @@ template<class T> void stl::List<T>::free() {
         tmp = this->head;
         this->lenght_ -= 1;
     }
+    this->end_ = nullptr;
 }
 
 template<class T> stn::Node<T>* stl::List<T>::begin() {
@@ -152,22 +161,27 @@ template<class T> bool stl::List<T>::remove(T value) {
 }
 
 template<class T> void stl::List<T>::removeAll(T value) {
+    stn::Node<T>* tmpHead = this->getItemAddress(0);
+    stn::Node<T>* prev = nullptr;
+
     stl::List<T> newList;
 
-    struct stn::Node<T>* tmp = this->head;
-    struct stn::Node<T>* tmp2 = nullptr;
-
     this->lenght_ = 0;
-    
-    while(tmp != nullptr) {
-        if(tmp->data != value) {
-            newList.appendEnd(tmp->data);
+
+    while(tmpHead != nullptr) {
+        if(tmpHead->data != value) {
             this->lenght_ += 1;
+            newList.appendEnd(tmpHead->data);
         }
-        tmp = tmp->next;
+
+        prev = tmpHead;
+        tmpHead = tmpHead->next;
+
+        delete prev;
     }
 
     this->setHead(newList.getItemAddress(0));
+    this->setEnd(newList.getEnd());
 }
     
 template<class T> int stl::List<T>::find(T value) {
