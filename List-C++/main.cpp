@@ -17,7 +17,7 @@ Methods Tested:
 
     lenght();
 
-    getItem();
+    getItem2();
 
     remove();
 
@@ -31,27 +31,30 @@ Methods Tested:
 
     getItem();
 
+    getItemAddress();
+
     removeAll();
 
-Developing Phase:
-    
-    removeAll();
+    count();
+
+    replace();
+
+    replaceAll();
+
+    popFront();
+
+    popEnd();
 
 Founder: Vincenzo Caliendo
 
 Third Part Programs:
 
-    valgrind: used to test if the list make leaks during the usage
+    valgrind: used to test if the list cause memory leaks.
 
-Last Update: 11 / 05 / 2022
+Last Update: 15 / 05 / 2022 / 17:28
 */
 
 /*class used for testing the list*/
-class Test {
-    public:
-        int ok;
-        std::string okay;
-};
 
 int main() {
     /*declare the list with the type that you want*/
@@ -192,6 +195,10 @@ int main() {
     std::cout<<"\nNew list's lenght: "<<list2.lenght();
     for(int i=0; i<list2.lenght(); i++) std::cout<<"\n"<<list2.getItem(i);
 
-    
+    /*free all the lists*/
+    lista.free();
+    list.free();
+    list2.free();
+
     return 0;
 }

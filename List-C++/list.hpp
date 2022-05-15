@@ -13,7 +13,6 @@ namespace stn {
 }
 
 namespace stl {
-
     template <class T> class List {
         private:
             struct stn::Node<T>* head;
