@@ -233,24 +233,33 @@ template<class T> T stl::List<T>::popFront() {
 }
 
 template<class T> T stl::List<T>::popEnd() {
-    if(this->end_ != nullptr) {
-        struct stn::Node<T>* tmp = this->head;
+    /* if there is only one item */
+    if (this->lenght_ == 1) {
+        T data = this->head->data;
 
-        while(tmp->next != this->end_) {
-            tmp = tmp->next;
-        }
-
-        T data = this->end_->data;
-
-        tmp->next = this->end_->next;
-
-        delete this->end_;
-
-        this->end_ = tmp;
+        this->head = nullptr;
         this->lenght_ -= 1;
 
         return data;
     }
+
+    this->end_ != nullptr;
+    struct stn::Node<T>* tmp = this->head;
+        
+    while(tmp->next != this->end_) {
+        tmp = tmp->next;
+    }
+
+    T data = this->end_->data;
+
+    tmp->next = this->end_->next;
+
+    delete this->end_;
+
+    this->end_ = tmp;
+    this->lenght_ -= 1;
+
+    return data;
 }
 
 template<class T> void stl::List<T>::removeAll(T value) {
