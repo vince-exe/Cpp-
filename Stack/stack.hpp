@@ -13,6 +13,9 @@ namespace stk {
             stl::List<T> stack;
         
         public:
+            /* subscript the [] operator */
+            T &operator[](int i);
+
             /* push an item in the stack */
             void push(T item);
 

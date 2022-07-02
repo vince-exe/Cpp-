@@ -1,6 +1,25 @@
 #include "stack.hpp"
 
+#include "./Exceptions/excpetions.cpp"
+
 #include <iostream>
+
+
+template<class T> T &stk::Stack<T>::operator[](int index) {
+    /* check the index */
+    if (index < 0 or index >= this->len()) {
+        throw ste::IndexError();
+    }
+
+    int i = 0;
+    stn::Node<T>* node = nullptr;
+
+    /* move the node at the given index */
+    for(node = this->stack.begin(); i < index; node = this->stack.next(node), i++);
+
+    /*return the value of the node at the given index */
+    return node->data;
+}
 
 template<class T> void stk::Stack<T>::push(T item) {
     this->stack.appendEnd(item);
@@ -11,6 +30,11 @@ template<class T> int stk::Stack<T>::len() {
 }
 
 template<class T> T stk::Stack<T>::pop() {
+    /* if the stack is empty throw the GetItemError Exception */
+    if (this->empty()) {
+        throw ste::GetItemError();
+    }
+
     return this->stack.popEnd();
 }
 
@@ -44,5 +68,10 @@ template<class T> int stk::Stack<T>::count(T item) {
 }
 
 template<class T> T stk::Stack<T>::get() {
+    /* if the stack is empty throw the GetItemError Exception */
+    if (this->empty()) {
+        throw ste::GetItemError();
+    }
+
     return this->stack.getItem(this->len() - 1);
 }
