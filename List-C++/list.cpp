@@ -1,5 +1,8 @@
 #include "list.hpp"
 
+#include "exceptions.cpp"
+
+
 template<class T> void stl::List<T>::setHead(stn::Node<T> *newAddress) {
     this->head = newAddress;
 }
@@ -315,4 +318,19 @@ template<class T> int stl::List<T>::count(T value) {
     }
     
     return count;
+}
+
+template<class T> T stl::List<T>::operator[](int index) {
+    /* check the index */
+    if (index < 0 or index >= this->lenght_) {
+        throw sle::IndexError();
+    }
+
+    stn::Node<T>* node = this->begin();
+
+    /* move the node through the list */ 
+    for(int i = 0; i < index; i++, node = this->next(node));
+
+    /* return the data */
+    return node->data;
 }

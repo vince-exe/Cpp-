@@ -16,7 +16,9 @@ namespace stl {
     template <class T> class List {
         private:
             struct stn::Node<T>* head;
+
             struct stn::Node<T>* end_;
+
             int lenght_;
 
             void setHead(stn::Node<T>* newAddress);
@@ -31,9 +33,12 @@ namespace stl {
             /*create and initialize a list with n values, the values will be added at the start of the list*/
             List(int iterate, T value);
 
-            /*create and initilize a list with n values, if end is True the values will be added at the end of the code, else..*/
+            /*create and initilize a list with n values, if end is True the values will be added at the end of the list, else..*/
             List(int iterate, T value, bool end);
 
+            /* overload of the [] operator */
+            T operator[](int index);
+            
             /*append the item to the start of the list*/
             void appendStart(T value);
 

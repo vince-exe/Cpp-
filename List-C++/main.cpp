@@ -54,7 +54,6 @@ Third Part Programs:
 Last Update: 15 / 05 / 2022 / 17:28
 */
 
-/*class used for testing the list*/
 
 int main() {
     /*declare the list with the type that you want*/
