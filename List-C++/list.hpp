@@ -36,9 +36,32 @@ namespace stl {
             /*create and initilize a list with n values, if end is True the values will be added at the end of the list, else..*/
             List(int iterate, T value, bool end);
 
-            /* overload of the [] operator */
+            /* return the value at the given index
+               Note:
+                    if the index doesn't exist, the method will raise an sle::IndexError() exception*/
             T operator[](int index);
+
+            /* appen the given value at the END of the list */
+            void operator+=(T value);
             
+            /* compare (the nodes value) of two lists
+               Note:
+                    if the lists are of different length, the method will raise an sle::CompareError() exception
+            */
+            inline bool operator==(stl::List<T> right);
+
+            /* returns a list linked by the sum of the nodes of the two given lists 
+               Note:
+                    the nodes will be added at the end of the new list
+            */
+            stl::List<T> operator+(stl::List<T> right);
+
+            /* check if the len of the left side list is greater than the len of the other list*/
+            bool operator>(stl::List<T> right);
+
+            /* check if the len of the left side list is lower than the len of the other list */
+            bool operator<(stl::List<T> right);
+
             /*append the item to the start of the list*/
             void appendStart(T value);
 
@@ -117,12 +140,6 @@ namespace stl {
             WARNING: use this method onlt if your list is one of this type (int, char, string, bool, float, double)
             */
             int count(T value);
-
-            /*
-            return the item at the given position,
-            WARNING: this method does not check if the given index exist
-            */
-            T getItem(int index);
 
             /*
             return the item at the given position

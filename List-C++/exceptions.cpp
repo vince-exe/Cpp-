@@ -11,4 +11,13 @@ namespace sle  {
                 return "Index Out Of Range";
             }
     };
+
+
+    class CompareError : public std::exception {
+        public:
+            const char * what() const throw() {
+                return "Can not compare the two lists";
+            }
+    };
+
 }

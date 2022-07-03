@@ -70,7 +70,7 @@ int main() {
 
     /*print the list with a simple for*/
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<lista.getItem(i)<<std::endl;
+        std::cout<<lista[i]<<std::endl;
     }
 
     /*remove the items from the list and check if they are been removed*/
@@ -80,7 +80,7 @@ int main() {
     lista.remove(10);
 
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<lista.getItem(i)<<std::endl;
+        std::cout<<lista[i]<<std::endl;
     }
 
     /*
@@ -96,7 +96,7 @@ int main() {
 
     std::cout<<"\nPrint the list after the modify"<<std::endl;
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<lista.getItem(i)<<std::endl;
+        std::cout<<lista[i]<<std::endl;
     }
 
     /*find the position of the items in the list*/
@@ -111,7 +111,7 @@ int main() {
     lista.appendEnd(2);
     
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\nitem: "<<lista.getItem(i);
+        std::cout<<"\nitem: "<<lista[i];
     }
 
     lista.removeAll(1); 
@@ -120,7 +120,7 @@ int main() {
     lista.appendEnd(10);
 
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\nitem: "<<lista.getItem(i);
+        std::cout<<"\nitem: "<<lista[i];
     }
 
 
@@ -135,7 +135,7 @@ int main() {
     std::cout<<"\nHow many nodes with the 10 value are there??: "<<lista.count(10);
 
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\n"<<lista.getItem(i);
+        std::cout<<"\n"<<lista[i];
     }
 
     std::cout<<"\nFirst element of the list: "<<lista.popFront();
@@ -143,20 +143,20 @@ int main() {
     lista.appendEnd(56);
 
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\n"<<lista.getItem(i);
+        std::cout<<"\n"<<lista[i];
     } 
     
     std::cout<<"\nLast element of the list: "<<lista.popEnd()<<std::endl;
     
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\n"<<lista.getItem(i);
+        std::cout<<"\n"<<lista[i];
     }
 
     /*replace the item with value 56*/
     std::cout<<"replaced item: "<<lista.replace(10, 156);
 
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\n"<<lista.getItem(i);
+        std::cout<<"\n"<<lista[i];
     }
 
     lista.free();
@@ -170,14 +170,14 @@ int main() {
 
     std::cout<<"\nBefore the replace\n";
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\n"<<lista.getItem(i);
+        std::cout<<"\n"<<lista[i];
     }
 
     lista.replaceAll(11, 8);
 
     std::cout<<"\nAfter the replace\n";
     for(int i=0; i<lista.lenght(); i++) {
-        std::cout<<"\n"<<lista.getItem(i);
+        std::cout<<"\n"<<lista[i];
     }
     
     lista.free();
@@ -186,13 +186,13 @@ int main() {
     stl::List<int> list(8, 50);
 
     std::cout<<"\nNew list's lenght: "<<list.lenght();
-    for(int i=0; i<list.lenght(); i++) std::cout<<"\n"<<list.getItem(i);
+    for(int i=0; i<list.lenght(); i++) std::cout<<"\n"<<list[i];
 
     /*testing another constructor overload*/
     stl::List<int> list2(5, 100, true);
 
     std::cout<<"\nNew list's lenght: "<<list2.lenght();
-    for(int i=0; i<list2.lenght(); i++) std::cout<<"\n"<<list2.getItem(i);
+    for(int i=0; i<list2.lenght(); i++) std::cout<<"\n"<<list2[i];
 
     /*free all the lists*/
     lista.free();

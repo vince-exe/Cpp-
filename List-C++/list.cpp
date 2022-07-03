@@ -110,16 +110,6 @@ template<class T> stn::Node<T> *stl::List<T>::next(stn::Node<T> *it) {
     return (it = it->next);
 }
 
-template<class T> T stl::List<T>::getItem(int index) {
-    struct stn::Node<T>* tmp = this->head;
-
-    for(int i=0; i<index && tmp != nullptr; i++) {
-        tmp = tmp->next;
-    }
-
-    return tmp->data;
-}
-
 template<class T> stn::Node<T> *stl::List<T>::getItemAddress(int index) {
     if(index < 0) {
         return this->head;
@@ -333,4 +323,58 @@ template<class T> T stl::List<T>::operator[](int index) {
 
     /* return the data */
     return node->data;
+}
+
+template<class T> void stl::List<T>::operator+=(T value) {
+    this->appendEnd(value);
+}
+
+template<class T> inline bool stl::List<T>::operator==(stl::List<T> right) {
+    /* check if the two lists have different lenght */
+    if (this->lenght_ != right.lenght()) {
+        throw sle::CompareError();
+    }
+    
+    /* create the two list nodes, that we are going to use to iterate trough the lists */
+    stn::Node<T>* node1 = this->begin();
+    stn::Node<T>* node2 = right.begin();
+
+    for(int i = 0; i < this->lenght_; i++, node1 = this->next(node1), 
+                                           node2 = right.next(node2)) {
+        
+        if(node1->data != node2->data) {
+            return false;
+        }
+    }   
+
+    return true;
+}
+
+template<class T> stl::List<T> stl::List<T>::operator+(stl::List<T> right) {
+    /* create the two list nodes, that we are going to use to iterate trough the lists */
+    stn::Node<T>* node1 = this->begin();
+    stn::Node<T>* node2 = right.begin();
+    /* create the new list */
+    stl::List<T> newList; 
+    
+    /* append the items of the left list */
+    for(int i = 0; i < this->lenght_; i++, node1 = this->next(node1)) {
+        newList.appendEnd(node1->data);
+    }
+
+    /* append the items of the right side list */
+    for(int i = 0; i < right.lenght(); i++, node2 = right.next(node2)) {
+        newList.appendEnd(node2->data);
+    }
+
+    /* return the concatenate list */
+    return newList;
+}
+
+template<class T> bool stl::List<T>::operator>(stl::List<T> right) {
+    return this->lenght_ > right.lenght();
+}
+
+template<class T> bool stl::List<T>::operator<(stl::List<T> right) {
+    return this->lenght_ < right.lenght();
 }
