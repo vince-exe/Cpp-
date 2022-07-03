@@ -289,7 +289,7 @@ template<class T> int stl::List<T>::find(T value) {
     }
 
     if(tmp == nullptr) {
-        return ITEM_NOT_FOUND;
+        throw sle::ItemNotFound();
     }
 
     return i;
@@ -377,4 +377,15 @@ template<class T> bool stl::List<T>::operator>(stl::List<T> right) {
 
 template<class T> bool stl::List<T>::operator<(stl::List<T> right) {
     return this->lenght_ < right.lenght();
+}
+
+template<class T> stl::List<T> stl::List<T>::operator=(stl::List<T> right) {
+    stl::List<T> newList;
+
+    /* append the items */
+    for(int i = 0; i < right.lenght(); i++) {
+        newList.appendEnd(right[i]);
+    }
+    
+    return newList;
 }

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <iostream>
+
 #include <memory>
 
-#define ITEM_NOT_FOUND -1
 
 namespace stn {
     template<typename var> struct Node {
@@ -61,6 +61,12 @@ namespace stl {
 
             /* check if the len of the left side list is lower than the len of the other list */
             bool operator<(stl::List<T> right);
+
+            /* copy the nodes value of a list into another list
+               Note:
+                    the nodes value will be added at the end of the new list 
+            */
+            stl::List<T> operator=(stl::List<T> right);
 
             /*append the item to the start of the list*/
             void appendStart(T value);
@@ -128,8 +134,9 @@ namespace stl {
             T popEnd();
 
             /*
-            search in the list the item that has the given value and return his position,
-            if the method doesn't find anithing it will return -1
+            Search in the list the item that has the given value and return his position,
+            if the method doesn't find anithing it will raise an sle::ItemNotFound() exception
+
             WARNING: use this method only if your list is one of this type (int, char, string, bool, float, double)
             otherwise you have to overload the == operator
             */

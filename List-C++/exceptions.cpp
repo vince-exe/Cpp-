@@ -20,4 +20,10 @@ namespace sle  {
             }
     };
 
+    class ItemNotFound : public std::exception {
+        public:
+            const char * what() const throw() {
+                return "Item Not Found";
+            }
+    };  
 }

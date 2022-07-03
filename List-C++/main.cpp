@@ -99,8 +99,13 @@ int main() {
         std::cout<<lista[i]<<std::endl;
     }
 
-    /*find the position of the items in the list*/
-    std::cout<<"\nPosition of the item that has 0 as value: "<<lista.find(0)<<std::endl;
+    try {
+        /*find the position of the items in the list*/
+        std::cout<<"\nPosition of the item that has 0 as value: "<<lista.find(0)<<std::endl;
+    }
+    catch(sle::ItemNotFound()) {
+        std::cout<<"\nThe item doesn't exist";
+    }
     
     /*free the list*/
     lista.free();
