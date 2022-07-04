@@ -2,6 +2,8 @@
 
 #include "exceptions.cpp"
 
+#include <memory>
+
 
 template<class T> void stl::List<T>::setHead(stn::Node<T> *newAddress) {
     this->head = newAddress;

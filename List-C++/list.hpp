@@ -2,9 +2,6 @@
 
 #include <iostream>
 
-#include <memory>
-
-
 namespace stn {
     template<typename var> struct Node {
         var data;
