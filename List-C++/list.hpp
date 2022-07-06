@@ -1,25 +1,25 @@
 #pragma once
 
-#include <iostream>
-
 namespace stn {
-    template<typename var> struct Node {
-        var data;
-        struct Node* next;
+    template<typename T> class Node {
+        public:
+            T data;
+            Node* next;
+            Node() : data(), next(nullptr) {}
     };
 }
 
 namespace stl {
     template <class T> class List {
         private:
-            struct stn::Node<T>* head;
+            stn::Node<T>* head;
 
-            struct stn::Node<T>* end_;
+            stn::Node<T>* end_;
 
-            int lenght_;
+            size_t lenght_;
 
-            void setHead(stn::Node<T>* newAddress);
-            void setEnd(stn::Node<T>* newAddress);
+            constexpr void setHead(stn::Node<T>* newAddress);
+            constexpr void setEnd(stn::Node<T>* newAddress);
 
             stn::Node<T>* getEnd();
 
@@ -28,10 +28,10 @@ namespace stl {
             List();
 
             /*create and initialize a list with n values, the values will be added at the start of the list*/
-            List(int iterate, T value);
+            List(const int iterate,const T& value);
 
             /*create and initilize a list with n values, if end is True the values will be added at the end of the list, else..*/
-            List(int iterate, T value, bool end);
+            List(const int iterate, const T& value, bool end);
 
             /* return the value at the given index
                Note:
@@ -39,13 +39,13 @@ namespace stl {
             T operator[](int index);
 
             /* appen the given value at the END of the list */
-            void operator+=(T value);
+            void operator+=(const T& value);
             
             /* compare (the nodes value) of two lists
                Note:
                     if the lists are of different length, the method will raise an sle::CompareError() exception
             */
-            inline bool operator==(stl::List<T> right);
+            inline bool operator==(stl::List<T>& right);
 
             /* returns a list linked by the sum of the nodes of the two given lists 
                Note:
@@ -54,10 +54,10 @@ namespace stl {
             stl::List<T> operator+(stl::List<T> right);
 
             /* check if the len of the left side list is greater than the len of the other list*/
-            bool operator>(stl::List<T> right);
+            constexpr bool operator>(const stl::List<T>& right);
 
             /* check if the len of the left side list is lower than the len of the other list */
-            bool operator<(stl::List<T> right);
+            constexpr bool operator<(const stl::List<T>& right);
 
             /* copy the nodes value of a list into another list
                Note:
@@ -66,13 +66,13 @@ namespace stl {
             stl::List<T> operator=(stl::List<T> right);
 
             /*append the item to the start of the list*/
-            void appendStart(T value);
+            void appendStart(const T& value);
 
             /*free the list*/
             void free();    
 
             /*append the item to the end of the list*/
-            void appendEnd(T value);
+            void appendEnd(const T& value);
             
             /*return the address of memory of the first element in the list*/
             stn::Node<T>* begin();
@@ -96,54 +96,68 @@ namespace stl {
             */
             bool end(stn::Node<T>* it);
 
-            /*
-            remove the item in the list with that value, return true if the item has been successfully removed
-            WARNING: This method return only the first item that has the given value,
-                     If there are other items with the given value, they will not be removed
-                     Use this method only if your list is one of this type: (int, char, string, bool, float, double)
-                     otherwise you have to overload the == operator
-            */
-            bool remove(T value);
+            /**
+             * @brief remove the item in the list with that value, return true if the item has been successfully removed
+             *  equality operator required
+             * @param value 
+             * @return true if success
+             */
+            bool remove(const T& value);
 
-            /*
-            change the value of a node with the given value, return true if the operation went succesfully else return false
-            NOTE: If the list has more nodes with the given value, it will be modified only the first node the the method find
-                  If you want something else check replaceAll();
-            */
-            bool replace(T value, T newValue);
+            /**
+             * @brief changes first  of value with new value
+             * 
+             * @param value 
+             * @param newValue 
+             * @return true if success
+             */
+            bool replace(const T& value, const T& newValue);
 
-            /*change the value of all the nodes of the list that have the given value, return true if at least one of this has been modified, else return false*/
-            bool replaceAll(T value, T newValue);
+            /**
+             * @brief replaces all appearance of value with newvalue
+             * 
+             * @param value 
+             * @param newValue 
+             * @return true if at least one node has been changed  
+             */
+            bool replaceAll(const T& value, const T& newValue);
 
-            /*
-            remove all the items the has as value the given value.
-            WARNING: Use this method only if your list is one of this type (int, char, string bool, float, double)
-            otherwise you have to overload the == operator
-            */
+            /**
+             * @brief removes all appearances of value
+             * 
+             * @param value 
+             */
             void removeAll(T value);
 
-            /*
-            return the first element of the list (head), and reduce the lenght of 1
-            */
+            /**
+             * @brief returns data of first element, element removed from list
+             * 
+             * @return T 
+             */
             T popFront();
 
-            /*return the last element of the list, and reduce the lenght of 1*/
+            /**
+             * @brief returns data of last element, element removed from list
+             * 
+             * @return T 
+             */
             T popEnd();
 
-            /*
-            Search in the list the item that has the given value and return his position,
-            if the method doesn't find anithing it will raise an sle::ItemNotFound() exception
-
-            WARNING: use this method only if your list is one of this type (int, char, string, bool, float, double)
-            otherwise you have to overload the == operator
-            */
-            int find(T value);
+            /**
+             * @brief returns first appearance of value in list, equality operator required
+             * 
+             * @param value 
+             * @return position 
+             */
+            int find(const T& value);
             
-            /*
-            this method iterate throw the list and return the number of nodes that have as value the given value
-            WARNING: use this method onlt if your list is one of this type (int, char, string, bool, float, double)
-            */
-            int count(T value);
+            /**
+             * @brief returns number of nodes with given value, queality operator required
+             * 
+             * @param value 
+             * @return amount 
+             */
+            int count(const T& value);
 
             /*
             return the item at the given position
@@ -152,7 +166,7 @@ namespace stl {
             Case: Index Greater Than List Lenght: the method will return the item at the first position
             Case: Index Negative: the method will return the item at the first position
             */
-            T getItem2(int index);
+            T getItem(int index);
 
             /*return the lenght of the list*/
             int lenght();
