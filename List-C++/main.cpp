@@ -86,11 +86,11 @@ int main() {
     /*
     if you want to have more control on your nodes, you can use stn::Node namespace (namespace built into list.hpp)
     to declare a node and move it with the showen methods!!
-    */
+    */ 
     std::cout<<std::endl;
 
     int i=0;
-    for(stn::Node<int>* node = lista.begin(); !lista.end(node); node = lista.next(node), i++) {
+    for(auto node = lista.begin(); !lista.end(node); node = lista.next(node), ++i) {
         node->data = i;
     }
 
@@ -170,7 +170,7 @@ int main() {
     for(int i=0; i<10; i++) {
         lista.appendEnd(11);
     }
-    stn::Node<int>* node = lista.begin();
+    auto node = lista.begin();
     node->data = 56;
 
     std::cout<<"\nBefore the replace\n";
